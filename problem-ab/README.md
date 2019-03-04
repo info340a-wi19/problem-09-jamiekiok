@@ -92,7 +92,7 @@ To complete the exercise, you will need to edit the included **`src/index.js`** 
 
         Note that when the user signs in, this will cause an "authentication event" that will be caught by the listener you registered in the previous step, which then causes the `render()` function to show them as logged in!
     
-    - In `handleSignOut()`, you should call `firebase.auth().signOut()`, again saving any error messages in the state.
+    - In `handleSignOut()`, you should call `firebase.auth().signOut()`.
 
     Now you should be able to log your users in and out!
 
@@ -155,8 +155,6 @@ To complete the exercise, you will need to make minor changes to **`src/index.js
     - **`time`**, which should be a timestamp for when the post is recorded. You can use the constant **`firebase.database.ServerValue.TIMESTAMP`** to specify that the time should be whatever time the post is added to the Firebase server.
 
     Then use the `firebase.database().ref()` to get a reference to the `chirps` entry in the database, and use the `push()` method to add the new chirp to the database. You will need to `import` the `firebase` global from `firebase/app` here as well to make it available. 
-
-    (Note that you'll want to `catch()` if the Promise returned by the `.ref()` is rejected in order to log out any errors, though the provided code does not include a way to render those errors for the user to see).
 
     This should allow you to post new Chirps, which you will be able to see in the Firebase Web Console (though not in the app yet!)
 
