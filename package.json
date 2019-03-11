@@ -22,7 +22,7 @@
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
-    "firebase": "^5.5.9",
+    "firebase": "^5.8.6",
     "firebase-mock": "^2.2.10",
     "font-awesome": "^4.7.0",
     "jest-style-matchers": "^0.1.2",

@@ -20,6 +20,7 @@ var config = {
     storageBucket: "chirper-jamiekw.appspot.com",
     messagingSenderId: "368559295414"
 };
+
 firebase.initializeApp(config);
 
 
