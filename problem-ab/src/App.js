@@ -4,13 +4,10 @@ import firebase from 'firebase/app';
 import 'firebase/auth'; 
 
 
-
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      loading:true
-    };
+    this.state = {};
   }
 
   //A callback function for registering new users
@@ -19,8 +16,11 @@ class App extends Component {
 
     /* TODO: sign up user here */
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then((userCredentials) => {
-        userCredentials.updateProfile({
+    .then((userCredentials) => {
+        // note to self: remember to initalize this to use it!!!
+        let user = userCredentials.user; //access the newly created user
+        console.log('User created: '+user.uid);
+        user.updateProfile({
           displayName : handle,
           photoURL : avatar
         }).catch((error) => {
