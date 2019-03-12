@@ -29,7 +29,22 @@ export default class ChirpList extends Component {
     if(!this.state.chirps) return null; //if no chirps, don't display
 
     /* TODO: produce a list of `<ChirpItems>` to render */
-    let chirpItems = []; //REPLACE THIS with an array of actual values!    
+    let chirpKeys = Object.keys(this.state.chirps);
+    let mappedKeys = chirpKeys.map((key) => {
+      let chirpObj = this.state.chirps[key];
+      chirpObj.id = key;
+      return chirpObj;
+    })
+
+    mappedKeys.sort(function(a,b){
+      // Access timestamps, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return b.time - a.time;
+    });
+
+    let chirpItems = mappedKeys.map((chirpObj) => {
+      return <ChirpItem chirp={chirpObj} currentUser={this.props.currentUser} key={chirpObj.id} />   
+    });
 
     return (
       <div className="container">
@@ -43,6 +58,29 @@ class ChirpItem extends Component {
 
   likeChirp = () => {
     /* TODO: update the chirp when it is liked */
+    let chirp = this.props.chirp; //current chirp (convenience)
+
+    chirp.likes = {};
+
+
+    let idPath = "chirps/" + chirp.id + "/likes"
+    this.likesRef = firebase.database().ref(idPath);
+
+    let updatedChirpLikes = {};
+
+    if (this.props.chirp.likes) {
+      updatedChirpLikes = this.props.chirp.likes;
+    }
+
+    let uid = this.props.currentUser.uid;
+    if (uid in updatedChirpLikes){
+      updatedChirpLikes[uid] = null;
+    } else {
+      updatedChirpLikes[uid] = true;
+    }
+
+    this.likesRef.set(updatedChirpLikes)
+      .catch(err => console.log(err)); 
   }
  
   render() {
