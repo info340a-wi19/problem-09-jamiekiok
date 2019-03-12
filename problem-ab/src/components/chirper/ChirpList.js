@@ -1,12 +1,28 @@
 import React, { Component } from 'react'; //import React Component
 import Moment from 'react-moment';
 import './Chirper.css'; //load module-specific CSS
+import firebase from 'firebase/app';
+import 'firebase/database'; 
+
 
 //A list of chirps that have been posted
 export default class ChirpList extends Component {
   constructor(props){
     super(props);
     this.state = {chirps:[]};
+  }
+
+  componentDidMount() {
+    this.chirpsRef = firebase.database().ref('chirps');
+
+    this.chirpsRef.on('value', (snapshot) => {
+      let value = snapshot.val();
+      this.setState({chirps: value});
+    });
+  }
+
+  componentWillUnmount() {
+    this.chirpsRef.off();
   }
 
   render() {
