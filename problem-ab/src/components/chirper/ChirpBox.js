@@ -1,5 +1,6 @@
 import React, { Component } from 'react'; //import React Component
 import './Chirper.css'; //load module-specific CSS
+import firebase from 'firebase/app';
 
 //A form the user can use to post a Chirp
 export default class ChirpBox extends Component {
@@ -18,6 +19,19 @@ export default class ChirpBox extends Component {
     event.preventDefault(); //don't submit
     
     /* TODO: add a new Chirp to the database */
+    let user = this.props.currentUser; 
+
+    let newChirp = {
+      text: this.state.post,
+      userId: user.uid,
+      userName: user.displayName,
+      userPhoto: user.photoURL,
+      time: firebase.database.ServerValue.TIMESTAMP
+    };
+
+    let chirpsRef = firebase.database().ref('chirps');
+    chirpsRef.push(newChirp);
+
 
 
     this.setState({post:''}); //empty out post for next time
