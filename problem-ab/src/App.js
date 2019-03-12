@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import SignUpForm from './components/signup/SignUpForm';
 import firebase from 'firebase/app';
 import 'firebase/auth'; 
-
-
+import ChirperHeader from './components/chirper/ChirperHeader';
+import ChirpBox from './components/chirper/ChirpBox';
+import ChirpList from './components/chirper/ChirpList';
 
 class App extends Component {
   constructor(props){
@@ -97,14 +98,16 @@ class App extends Component {
     else { //if logged in, show welcome message
       content = (
         <div>
-          <WelcomeHeader user={this.state.user}>
+          <ChirperHeader user={this.state.user}>
             {/* log out button is child element */}
             {this.state.user &&
               <button className="btn btn-warning" onClick={this.handleSignOut}>
                 Log Out {this.state.user.displayName}
               </button>
             }
-          </WelcomeHeader>
+          </ChirperHeader>
+          <ChirpBox currentUser={this.state.user}></ChirpBox>
+          <ChirpList currentUser={this.state.user}></ChirpList>
         </div>
       );
     }

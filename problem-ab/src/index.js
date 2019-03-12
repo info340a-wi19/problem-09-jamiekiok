@@ -6,6 +6,7 @@ import 'font-awesome/css/font-awesome.css'; //using FA 4.7 atm
 
 import firebase from 'firebase/app';
 import 'firebase/auth'; 
+import 'firebase/database'; 
 
 import App from './App'; //so our app styling is applied second
 
