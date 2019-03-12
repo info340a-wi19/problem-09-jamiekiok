@@ -1,0 +1,67 @@
+export class HeaderNavBar extends Component {
+    render() {
+        return (
+            <div className="link-me-background"
+                aria-label="background image of an arm with rose tattoos holding flowers in a bath">
+                <Nav className="navbar navbar-expand-sm navbar-expand-md">
+                    <div className="container-fluid">
+                        <a className="navbar" href="index.html">
+                            <h1>Link Me!</h1>
+                        </a>
+                        <div className="dropdown float-right">
+                            <button type="button" className="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                                <i className="fa fa-bars light-bar" aria-label="menu"></i>
+                            </button>
+                            <div className="dropdown-menu">
+                                <a className="dropdown-item" href="#">Artists</a>
+                                <a className="dropdown-item" href="#">Styles</a>
+                                <a className="dropdown-item" href="ink-me.html">InkMe</a>
+                            </div>
+                        </div>
+                        <div id="expanded-menu">
+                            <div className="container">
+                                <div className="row">
+                                    <div className="col">
+                                        <a className="main-links " href="#">Artists</a>
+                                    </div>
+                                    <div className="col">
+                                        <a className="main-links" href="#">Styles</a>
+                                    </div>
+                                    <div className="col">
+                                        <a className="main-links" href="ink-me.html">InkMe</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Nav>
+            </div>
+        );
+    }
+}
+
+export class ContactInformation extends Component {
+    render() {
+        return (
+            <div className="container-fluid text-center">
+                <div className="row">
+                    <div className="col">
+                        <h4>Creators</h4>
+                        <p>Tracy Huynh</p>
+                        <p>Rahma Kamel</p>
+                    </div>
+                    <div className="col">
+                        <h4>Contact</h4>
+                        <a href="mailto:ischool.uw.edu">ischool.uw.edu</a>
+                    </div>
+                    <div className="col">
+                        <h4>Copyright</h4>
+                        <p>© Tracy Huynh</p>
+                        <p>© Rahma Kamel</p>
+                        <p>Photos from Instagram</p>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}

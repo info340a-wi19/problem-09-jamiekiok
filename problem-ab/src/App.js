@@ -4,15 +4,19 @@ import firebase from 'firebase/app';
 import 'firebase/auth'; 
 
 
+
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {};
-  }
+    this.state = {loading:true};
+}
 
   //A callback function for registering new users
   handleSignUp = (email, password, handle, avatar) => {
-    this.setState({errorMessage:null}); //clear any old errors
+    // this.setState({errorMessage:null}); //clear any old errors
+    this.state.errorMessage = null;
+
+
 
     /* TODO: sign up user here */
     firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -25,19 +29,21 @@ class App extends Component {
           photoURL : avatar
         }).catch((error) => {
           // An error happened.
-          this.setState = ({errorMessage: error.message});
+          this.state.errorMessage = error.message;
         }); 
       })
       .catch((error) => { //report any errors
-        this.setState = ({errorMessage: error.message});
-        console.log(this.state.errorMessage);
+        this.state.errorMessage = error.message;
       });
     }
 
   componentDidMount = () => {
     this.authUnSubFunction = firebase.auth().onAuthStateChanged((firebaseUser) => {
       if(firebaseUser) { //if exists, then we logged in
-        this.setState({user: firebaseUser});
+        let user = firebaseUser;
+        console.log('made it to component did mount:');
+        console.log(user);
+        this.setState({user: user});
       } else {
         this.setState({user: null});
       }
@@ -51,13 +57,24 @@ class App extends Component {
 
   //A callback function for logging in existing users
   handleSignIn = (email, password) => {
-    this.setState({errorMessage:null}); //clear any old errors
+    console.log('this state:')
+    console.log(this.state);
+    console.log('this');
+    console.log(this);
+    this.state.test = true; //works but very bad style
+    this.state.errorMessage = null; //works but very bad style
+    // this.setState({test:true}); 
+    // this.setState({errorMessage:null}); //clear any old errors
+    
+    console.log('this state 2 :') // setting but has error
+    console.log(this.state);
 
     /* TODO: sign in user here */
     firebase.auth().signInWithEmailAndPassword(email, password)
       .catch((err) => {  //log any errors for debugging
-        console.log(err.message);
-        this.setState({errorMessage: err.message})
+        this.state.errorMessage = err.message;
+        //this.setState({errorMessage: err.message})
+        console.log(this.state.errorMessage);
        })
    }
 
